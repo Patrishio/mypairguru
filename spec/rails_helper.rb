@@ -7,6 +7,8 @@ require "pry"
 require "capybara/rails"
 require "simplecov"
 require "shoulda/matchers"
+require 'net/http'
+require 'webmock/rspec'
 SimpleCov.start "rails"
 # Add additional requires below this line. Rails is not loaded until this point!
 
