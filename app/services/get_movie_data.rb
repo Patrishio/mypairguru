@@ -12,18 +12,18 @@ class GetMovieData
       http.use_ssl = true
       request = Net::HTTP::Get.new(uri.request_uri)
       response = http.request(request)  
-      JSON.parse(response.body)
+      JSON.parse(response.body) if response.body.present?
     end
   
     def rating      
-      @movie_data["data"]["attributes"]["rating"]
+      @movie_data["data"]["attributes"]["rating"] if @movie_data.present?
     end
   
     def plot
-      @movie_data["data"]["attributes"]["plot"]
+      @movie_data["data"]["attributes"]["plot"] if @movie_data.present?
     end
   
     def poster
-      "https://pairguru-api.herokuapp.com#{@movie_data["data"]["attributes"]["poster"]}"
+      "https://pairguru-api.herokuapp.com#{@movie_data["data"]["attributes"]["poster"]}" if @movie_data.present?
     end
   end

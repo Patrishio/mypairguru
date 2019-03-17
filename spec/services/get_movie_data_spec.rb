@@ -2,7 +2,19 @@ require "rails_helper"
 
 describe "Get movie data" do 
   let(:action) { GetMovieData.new("Godfather") }
-  let(:json_body) {({"data":{"id":"6","type":"movie","attributes":{"title":"Godfather","plot":"The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.","rating":9.2,"poster":"/godfather.jpg"}}}).to_json}
+  let(:json_body) {
+    (
+      {"data":
+        {"id":"6",
+        "type":"movie",
+        "attributes":{
+          "title":"Godfather",
+          "plot":"The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+          "rating":9.2,"poster":"/godfather.jpg"
+        }
+      }
+      }
+    ).to_json}
   
   # --------------------------------------------------------
   it "returns proper action rating" do
