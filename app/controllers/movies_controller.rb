@@ -7,6 +7,7 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
+    @movie_data = @movie.movie_data
   end
 
   def send_info

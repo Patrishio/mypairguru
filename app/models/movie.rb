@@ -14,4 +14,8 @@
 
 class Movie < ApplicationRecord
   belongs_to :genre
+
+  def movie_data
+    GetMovieData.new(self.title)    
+  end  
 end

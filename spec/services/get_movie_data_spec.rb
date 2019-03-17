@@ -48,6 +48,5 @@ describe "Get movie data" do
     to_return(status: 200, body: json_body, headers: {})        
     
     expect(action.poster).to eq("https://pairguru-api.herokuapp.com/godfather.jpg")
-
   end      
 end
