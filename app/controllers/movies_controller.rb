@@ -1,8 +1,11 @@
 class MoviesController < ApplicationController
   before_action :authenticate_user!, only: [:send_info]
+  before_action :authenticate_user!, only: [:show], if: :format_json?
+
 
   def index
     @movies = Movie.all.decorate
+    
     respond_to do |format|
       format.html
       format.json { 
@@ -19,7 +22,20 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
-    @movie_data = @movie.movie_data
+    
+    respond_to do |format|
+      format.html {
+        @movie_data = @movie.movie_data
+      }
+      format.json {
+        render json:
+        {
+          status: 'SUCCESS',
+          data: @movie
+        },
+        status: :ok
+      }
+    end
   end
 
   def send_info
@@ -33,4 +49,8 @@ class MoviesController < ApplicationController
     MovieExporter.new.call(current_user, file_path)
     redirect_to root_path, notice: "Movies exported"
   end
+end
+
+def format_json?
+  request.format.json?
 end
