@@ -18,4 +18,9 @@ class Movie < ApplicationRecord
   def movie_data
     GetMovieData.new(self.title)    
   end  
+
+  def self.name_and_title
+    self.pluck(:id, :title)
+  end
+
 end

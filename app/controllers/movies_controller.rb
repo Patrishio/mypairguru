@@ -3,6 +3,18 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all.decorate
+    respond_to do |format|
+      format.html
+      format.json { 
+        @jmovies = Movie.name_and_title
+        render json: 
+        {
+          status: 'SUCCESS',           
+          data: @jmovies
+        }, 
+        status: :ok 
+      }
+    end
   end
 
   def show
