@@ -27,11 +27,11 @@ class MoviesController < ApplicationController
       format.html {
         @movie_data = @movie.movie_data
       }
-      format.json {
+      format.json {   
         render json:
         {
           status: 'SUCCESS',
-          data: @movie
+          data: @movie.movie_export_data(current_user.enhanced)
         },
         status: :ok
       }

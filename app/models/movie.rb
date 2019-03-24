@@ -23,4 +23,17 @@ class Movie < ApplicationRecord
     self.pluck(:id, :title)
   end
 
+  def normal_movie_export_data
+    [self.id, self.title]
+  end
+
+  def enhanced_movie_export_data
+    [self.id, self.title, self.genre.id, self.genre.name, self.genre.movies.count]
+  end
+
+  def movie_export_data(enhanced_user)
+    return self.enhanced_movie_export_data if enhanced_user
+    normal_movie_export_data
+  end
+
 end

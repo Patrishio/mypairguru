@@ -20,7 +20,7 @@ group :development do
   gem "binding_of_caller"
   gem "bullet"
   gem "letter_opener"
-  gem "pry-rails"
+  gem "pry-rails"  
   gem "rails-erd"
   gem "spring"
   gem "spring-commands-rspec"
