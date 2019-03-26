@@ -40,13 +40,15 @@ class MoviesController < ApplicationController
 
   def send_info
     @movie = Movie.find(params[:id])
-    MovieInfoMailer.send_info(current_user, @movie).deliver_now
+    Delayed::Job.enqueue EmailMovieData.new(current_user, @movie) 
+    # MovieInfoMailer.send_info(current_user, @movie).deliver_now
     redirect_back(fallback_location: root_path, notice: "Email sent with movie info")
   end
 
   def export
     file_path = "tmp/movies.csv"
-    MovieExporter.new.call(current_user, file_path)
+    Delayed::Job.enqueue EmailMoviesCsv.new(current_user, file_path) 
+    # MovieExporter.new.call(current_user, file_path)
     redirect_to root_path, notice: "Movies exported"
   end
 end
